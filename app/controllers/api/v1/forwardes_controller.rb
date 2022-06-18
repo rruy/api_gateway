@@ -2,7 +2,9 @@
 
 module Api
   module V1
-    class ProxiesController < Api::ApplicationController
+    class ForwardesController < Api::ApplicationController
+      before_action :gateway
+
       def cart
         render json: { cart: 'Sucesso' }
       end

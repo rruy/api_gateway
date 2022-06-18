@@ -43,10 +43,16 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'rack-cors'
+require 'rack'
+require 'addressable/uri'
+require 'net/http'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'
+  gem "pry"
+  gem "pry-nav"
 end
 
 group :development do
@@ -65,8 +71,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem "pry"
-  gem "pry-nav"
   gem "rdoc", "~> 3.12"
   gem "shoulda", ">= 0"
   gem "simplecov", ">= 0"

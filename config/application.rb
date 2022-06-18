@@ -23,6 +23,15 @@ module ApiGateway
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib/reverse_proxy')
+
+    config.middleware.use ActionDispatch::Cookies
+
+    config.action_controller.raise_on_open_redirects = false
+
+    config.navigational_formats = [:json]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
