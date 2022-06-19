@@ -106,11 +106,10 @@ module ReverseProxy
       @target_response = nil
       @target_request['Accept-Encoding'] = nil if options[:reset_accept_encoding]
 
-      http_options = {}
-      http_options[:use_ssl] = (uri.scheme == 'https')
-      http_options[:verify_mode] = OpenSSL::SSL::VERIFY_NONE unless options[:verify_ssl]
-      http_options.merge!(options[:http]) if options[:http]
-
+      http_options = {
+        use_ssl: (uri.scheme == 'https'),
+        verify_mode: options[:verify_ssl].nil? ? nil : OpenSSL::SSL::VERIFY_NONE
+      }
       http_options.merge!(options[:http]) if options[:http]
 
       Net::HTTP.start(uri.hostname, uri.port, http_options) do |http|
