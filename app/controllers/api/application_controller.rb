@@ -7,9 +7,7 @@ module Api
     protected
 
     def process_request(api_path)
-      time = Benchmark.measure do
-        gateway(api_path)
-      end
+      time = Benchmark.measure { gateway(api_path) }
       log_event_request(request, response.status, time.real)
     end
 

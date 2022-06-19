@@ -8,7 +8,7 @@ module Api
       end
 
       def errors
-        render json: {}
+        render json: Request.where('status_code BETWEEN ? AND ?', 400, 599).to_json
       end
 
       def requests_per_hours

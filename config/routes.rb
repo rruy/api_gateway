@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       match 'catalogs' => 'forwardes#catalog', via: :get
       match 'produtos' => 'forwardes#products', via: :get
       match 'requests' => 'requests#index', via: :get
+      match 'requests/errors' => 'requests#errors', via: :get
     end
   end
 end
