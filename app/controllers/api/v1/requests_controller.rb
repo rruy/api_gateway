@@ -4,7 +4,7 @@ module Api
   module V1
     class RequestsController < Api::ApplicationController
       def index
-        render json: Request.all.to_json
+        render json: Request.all.order(id: :desc).to_json
       end
 
       def errors

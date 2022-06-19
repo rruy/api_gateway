@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+require 'benchmark'
 
 module Api
   module V1
     class ForwardesController < Api::ApplicationController
       def cards
-        gateway(ENV['REVERSE_PROXY_SRV_1'])
+        process_request(ENV['REVERSE_PROXY_SRV_1'])
       end
 
       def catalog
@@ -25,3 +26,5 @@ module Api
     end
   end
 end
+
+
