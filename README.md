@@ -87,7 +87,7 @@ Finished in 0.02098 seconds (files took 0.10544 seconds to load)
 26 examples, 0 failures
 ```
 
-### Desafio proposto
+#### Desafio proposto
 A empresa ACME possui atualmente +30.000 servidores onde suas aplicações são
 executadas. Elas comunicam-se entre si através de apis, sendo que algumas possuem
 ainda acesso externo (api.acme.com). 
@@ -99,10 +99,10 @@ requisitos (em ordem de importância):
 deve agir como um intermediário para as requisições dos clientes, enviando-as à
 api.acme.com.
 - Deverá permitir o controle das quantidades máximas de requisições por:
-○ IP de origem
-○ Path de destino
-○ Combinações de ambos
-○ Outros critérios ou alternativas de controle são bem vindos
+ -- IP de origem
+ -- Path de destino
+ -- Combinações de ambos
+ -- Outros critérios ou alternativas de controle são bem vindos
 
 - Deve armazenar (e também permitir que se consulte) as estatísticas de uso do
 proxy.
