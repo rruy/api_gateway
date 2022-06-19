@@ -75,4 +75,5 @@ group :test do
   gem "rdoc", "~> 3.12"
   gem "shoulda", ">= 0"
   gem "simplecov", ">= 0"
+  gem 'rspec-rails'
 end
