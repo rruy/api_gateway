@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      match 'cards' => 'forwardes#cart', via: :get
+      match 'carts' => 'forwardes#cart', via: :get
       match 'catalogs' => 'forwardes#catalog', via: :get
-      match 'requests' => 'forwardes#index', via: :get
+      match 'requests' => 'requests#index', via: :get
     end
   end
 end

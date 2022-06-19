@@ -59,7 +59,7 @@ module ApiGateway
       #  rpd: Request per day
 
       if ENV['RATE_LIMIT'] && ENV['RATE_LIMIT_TYPE'].present? && ENV['RATE_LIMIT_SIZE'].present?
-        r.define_rule(match: '/api/v1/cards',
+        r.define_rule(match: '/api/v1/songs',
                       metric: ENV['RATE_LIMIT_TYPE'].to_sym,
                       type: :fixed,
                       limit: ENV['RATE_LIMIT_SIZE'].to_i,
