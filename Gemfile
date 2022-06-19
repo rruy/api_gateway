@@ -43,9 +43,10 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'rack-cors'
-require 'rack'
-require 'addressable/uri'
-require 'net/http'
+gem 'rack'
+gem 'actionpack'
+gem 'addressable'
+gem 'redis'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
