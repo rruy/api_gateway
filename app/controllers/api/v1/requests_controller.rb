@@ -6,6 +6,18 @@ module Api
       def index
         render json: Request.all.to_json
       end
+
+      def errors
+        render json: {}
+      end
+
+      def requests_per_hours
+        render json: {}
+      end
+
+      def requests_per_day
+        render json: {}
+      end
     end
   end
 end

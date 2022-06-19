@@ -6,17 +6,21 @@ module Api
       def cards
         gateway(ENV['REVERSE_PROXY_SRV_1'])
       end
+
       def catalog
         gateway(ENV['REVERSE_PROXY_SRV_2'])
       end
+
       def cart
         gateway(ENV['REVERSE_PROXY_SRV_3'])
       end
+
       def products
         gateway(ENV['REVERSE_PROXY_SRV_4'])
       end
+
       def not_found
-        render json: { error: "Url not found!" }
+        render json: { error: 'Url not found!' }
       end
     end
   end

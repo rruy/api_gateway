@@ -5,12 +5,13 @@ module Api
     protected
 
     def gateway(api_path)
-      log_event_request(request)
       reverse_proxy api_path  do |config|
         config.on_missing do |code, response|
           redirect_to root_path, allow_other_host: true and return
         end
       end
+
+      log_event_request(request)
     end
 
     private
@@ -20,6 +21,8 @@ module Api
       remote_ip = request.remote_ip
       url = request.url
       payload = request.body.to_json
+      status_code = nil
+      time_total = nil
 
       RegisterRequestJob.perform_now(remote_ip, origin, url, payload)
     end
