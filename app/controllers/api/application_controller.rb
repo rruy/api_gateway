@@ -4,11 +4,11 @@ module Api
 
     protected
 
-    def gateway
+    def gateway(api_path)
       log_event_request(request)
-      reverse_proxy ENV['REVERSE_PROXY'] do |config|
+      reverse_proxy api_path  do |config|
         config.on_missing do |code, response|
-          redirect_to root_url, allow_other_host: true and return
+          redirect_to root_path, allow_other_host: true and return
         end
       end
     end

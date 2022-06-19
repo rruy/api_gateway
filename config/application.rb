@@ -59,11 +59,24 @@ module ApiGateway
       #  rpd: Request per day
 
       if ENV['RATE_LIMIT'] && ENV['RATE_LIMIT_TYPE'].present? && ENV['RATE_LIMIT_SIZE'].present?
-        r.define_rule(match: '/api/v1/songs',
+        r.define_rule(match: '/api/v1/cards',
                       metric: ENV['RATE_LIMIT_TYPE'].to_sym,
                       type: :fixed,
                       limit: ENV['RATE_LIMIT_SIZE'].to_i,
                       per_url: true)
+
+        r.define_rule(match: '/api/v1/carts',
+                        metric: ENV['RATE_LIMIT_TYPE'].to_sym,
+                        type: :fixed,
+                        limit: ENV['RATE_LIMIT_SIZE'].to_i,
+                        per_url: true)
+
+
+        r.define_rule(match: '/api/v1/catalogs',
+                          metric: ENV['RATE_LIMIT_TYPE'].to_sym,
+                          type: :fixed,
+                          limit: ENV['RATE_LIMIT_SIZE'].to_i,
+                          per_url: true)
 
         Rails.logger.debug "=> Rate Limiting Store Configured: #{r.cache}"
       end

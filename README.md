@@ -99,11 +99,12 @@ requisitos (em ordem de importância):
 deve agir como um intermediário para as requisições dos clientes, enviando-as à
 api.acme.com.
 - Deverá permitir o controle das quantidades máximas de requisições por:
- -- IP de origem
- -- Path de destino
- -- Combinações de ambos
- -- Outros critérios ou alternativas de controle são bem vindos
-
+   ```
+   - IP de origem
+   - Path de destino
+   - Combinações de ambos
+   - Outros critérios ou alternativas de controle são bem vindos
+   ```
 - Deve armazenar (e também permitir que se consulte) as estatísticas de uso do
 proxy.
 

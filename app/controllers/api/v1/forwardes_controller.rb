@@ -3,14 +3,20 @@
 module Api
   module V1
     class ForwardesController < Api::ApplicationController
-      before_action :gateway
-
-      def cart
-        render json: { cart: 'Sucesso' }
+      def cards
+        gateway(ENV['REVERSE_PROXY_SRV_1'])
       end
-
       def catalog
-        render json: { catalog: 'Sucesso' }
+        gateway(ENV['REVERSE_PROXY_SRV_2'])
+      end
+      def cart
+        gateway(ENV['REVERSE_PROXY_SRV_3'])
+      end
+      def products
+        gateway(ENV['REVERSE_PROXY_SRV_4'])
+      end
+      def not_found
+        render json: { error: "Url not found!" }
       end
     end
   end
