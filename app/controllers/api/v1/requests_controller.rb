@@ -11,12 +11,15 @@ module Api
         render json: Request.where('status_code BETWEEN ? AND ?', 400, 599).to_json
       end
 
-      def requests_per_hours
-        render json: {}
+      def per_hours
+        requests = Request.where('created_at BETWEEN ? AND ?', Time.now.beginning_of_hour, Time.now.end_of_hour).size
+
+        render json: { requestes_by_hour: requests.to_json }
       end
 
-      def requests_per_day
-        render json: {}
+      def per_day
+        requests = Request.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).size
+        render json: { requests_today: requests }
       end
     end
   end
