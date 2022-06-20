@@ -36,7 +36,7 @@ default: &default
 ### Arquitetura 
 Basicamente uma API Gateway é responsável por receber uma requisição de um cliente e direcionar para outros servidores que podem atende-lo e retorna a resposta ao cliente. Essa solução foi concebida para facilitar o gerenciamento de integração de clientes aos invés de disponibilizar diversos endpoints de microserviços distintos. Com isso facilita a integração de sistemas e permite a escalabilidade das aplicações da stack. 
 
-![Api Gateway](/public/apigateway.jpg)
+![Api Gateway](/public/apigateway.png)
 
 Quando não é adotado um pattern de API Gateway podemos ter os seguintes problemas:
 
