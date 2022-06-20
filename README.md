@@ -1,6 +1,6 @@
 ## API Gateway
 
-O objetivo desse projeto é a construção de uma API gateway que contenha um mecanismo de RateLimit de requests e metricas de consumo de processamento de requisições.
+O objetivo desse projeto é a construção de uma API gateway que contenha um mecanismo de RateLimit de requests e métricas de consumo de processamento de requisições.
 
 ### Requerimentos
 Requerimentos para instalar e rodar o projeto. 
@@ -47,30 +47,76 @@ Sob uma perspectiva de Segurança da Informação, há uma grande superfície ex
 
 Existem outras formas de resolver esse desafio como configuração do Nginx, ou utilizar o serviço da AWS API Gateway. No projeto desse repositório foi escolhida a opção de implementar um proxy reverso baseado no protocolo http.
 
-Explicação: 
+##### Rate Limit
 
-TODO: Escrever a explicação do projeto. 
+O controle de trafego e consumo da API foi elaborado para suportar uma quantidade especifica de requisições baseado na configuração que é realizada no arquivo applications.rb. É possível estabelecer os seguintes tipos de controles: 
 
+- Controle por quantidade de requisições por minuto, horas, dias. 
+- É possivel estabelecer uma quantidade x de requisições que poderá ser realizada em um endpoint especifico. 
+- Existe a possibilidade de combinar as duas condições, endpoint + tipo de metrica(minuto, hora, dias).
 
+Para realizar a configurações desejada deve ser alterado no arquivo application.rb os seguintes codigos dentro do bloco especifico do RateLimit. 
+
+```
+config.middleware.use RateRequest do |r|
+   r.define_rule(match: '/api/v1/cards', metric: rpm, type: :fixed, limit: 10.to_i, per_url: true)
+   r.define_rule(match: '/api/v1/cards', metric: rph, type: :fixed, limit: 10.to_i, per_url: true)
+   r.define_rule(match: '/api/v1/cards', metric: rpd, type: :fixed, limit: 10.to_i, per_url: true)
+end
+```
+No parametro metric podemos usar uma das opções [rpm, rph, rpd] onde são respectivamentes o controle por minuto, hora e dias.
+
+No parametro limit estabelecemos a quantidade de request que um cliente pode realizar. 
+
+Para armazenamento de dados de requests podemos utilizar o cache nativo do Rails, mas para sistemas em autoscaling devomos usar a configuração do REDIS para armazenamento compartilhado entre as instâncias do API Gateway.
 
 
 ##### Endpoints
-Lista de endpoints disponiveis para consulta
+Lista de endpoints disponíveis para consulta
+
+
+Enpoint raiz do projeto
 ```
 http: //localhost:3000/api/v1/entrypoint
 ```
+
+Perrmite consumir os dados de cartões através da API gateway - Enpoint chama o Server 01
 ```
-http: //localhost:3000/api/v1/cards
+GET http: //localhost:3000/api/v1/cards
 ```
+Perrmite consumir os dados de catalogos através da API gateway - Enpoint chama o Server 02
+
 ```
-http: //localhost:3000/api/v1/catalogs
+GET http: //localhost:3000/api/v1/catalogs
+```
+
+Perrmite consumir os dados de produtos através da API gateway - Enpoint chama o Server do IBGE
+
+```
+GET http: //localhost:3000/api/v1/produtos
 ```
 
 ##### Estatisticas de consulmo da api
-Log de acessos da API
+Log de acessos da API contendo todos os requests
 ```
-http: //localhost:3000/api/v1/requests
+GET http: //localhost:3000/api/v1/requests
 ```
+
+Log de acessos da API contendo todos os requests que apresentaram erros
+```
+GET http: //localhost:3000/api/v1/requests/errors
+```
+
+Retorna a quantidade de requests na hora atual na API
+```
+GET http: //localhost:3000/api/v1/requests/per_hours
+```
+
+Retorna a quantidade de requests na dia atual na API
+```
+GET http: //localhost:3000/api/v1/requests/per_day
+```
+
 
 ### Executar os testes unitários
 Para instalação caso não seja reconhecido o comando rspec:
