@@ -1,6 +1,6 @@
 ## API Gateway
 
-O objetivo desse projeto é a construção de uma API gateway que receba uma requisição cliente e seja responsável pelo redirecionamento para o microservico destino. Após o processamento deve ser retornado para o cliente a resposta da requisição. Além disso a Api tem um controle de requisições onde é possível configurar o controle de chamadas por minuto, por hora, por dia e por endpoints especificos para evitar requisições além da capacidade da API e garantir a estabilidade do serviço.
+O objetivo desse projeto é a construção de uma API gateway que contenha um mecanismo de RateLimit de requests e metricas de consumo de processamento de requisições.
 
 ### Requerimentos
 Requerimentos para instalar e rodar o projeto. 
