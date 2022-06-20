@@ -49,13 +49,13 @@ Existem outras formas de resolver esse desafio como configuração do Nginx, ou 
 
 ##### Rate Limit
 
-O controle de trafego e consumo da API foi elaborado para suportar uma quantidade especifica de requisições baseado na configuração que é realizada no arquivo applications.rb. É possível estabelecer os seguintes tipos de controles: 
+O controle de tráfego e consumo da API foi elaborado para suportar uma quantidade específica de requisições baseado na configuração que é realizada no arquivo applications.rb. É possível estabelecer os seguintes tipos de controles: 
 
-- Controle por quantidade de requisições por minuto, horas, dias. 
-- É possivel estabelecer uma quantidade x de requisições que poderá ser realizada em um endpoint especifico. 
-- Existe a possibilidade de combinar as duas condições, endpoint + tipo de metrica(minuto, hora, dias).
+- Controle por quantidade de requisições por minuto, horas e dias. 
+- É possivel estabelecer uma quantidade x de requisições que poderá ser realizada em um endpoint específico. 
+- Existe a possibilidade de combinar as duas condições, endpoint + tipo de métrica(minuto, hora, dias).
 
-Para realizar a configurações desejada deve ser alterado no arquivo application.rb os seguintes codigos dentro do bloco especifico do RateLimit. 
+Para realizar a configurações desejadas deve ser alterado no arquivo application.rb com os seguintes códigos dentro do bloco específico demilitado para o RateLimit conforme exemplo abaixo. 
 
 ```
 config.middleware.use RateRequest do |r|
@@ -64,9 +64,9 @@ config.middleware.use RateRequest do |r|
    r.define_rule(match: '/api/v1/cards', metric: rpd, type: :fixed, limit: 10.to_i, per_url: true)
 end
 ```
-No parametro metric podemos usar uma das opções [rpm, rph, rpd] onde são respectivamentes o controle por minuto, hora e dias.
+No parametro metric: podemos usar uma das opções [rpm, rph, rpd] onde são respectivamentes o controle por minuto, hora e dias.
 
-No parametro limit estabelecemos a quantidade de request que um cliente pode realizar. 
+No parametro limit: estabelecemos a quantidade de request que um cliente pode realizar. 
 
 Para armazenamento de dados de requests podemos utilizar o cache nativo do Rails, mas para sistemas em autoscaling devomos usar a configuração do REDIS para armazenamento compartilhado entre as instâncias do API Gateway.
 
